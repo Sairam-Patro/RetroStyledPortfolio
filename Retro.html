@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sairam Patro — Student Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Special+Elite&family=Permanent+Marker&family=Patrick+Hand&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --paper:#f5f0e8;
+  --paper2:#ede8d8;
+  --paper3:#faf7f0;
+  --ink:#1a1206;
+  --ink2:#2c2010;
+  --faded:#6b5c3e;
+  --faded2:#9b8c6e;
+  --red:#c0392b;
+  --blue:#1a3a6b;
+  --green:#1a5c2e;
+  --ruled:#c8bfa8;
+  --highlight:#f9e84a;
+  --highlight2:#b8e0ff;
+  --stamp-red:rgba(192,57,43,0.15);
+  --notebook:#2c5282;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:#d4c9b0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(180,160,120,0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(160,140,100,0.2) 0%, transparent 50%);
+  font-family:'Patrick Hand', cursive;
+  color:var(--ink);
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* ── NOTEBOOK RINGS TOP ── */
+.rings-bar{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:28px;background:var(--notebook);
+  display:flex;align-items:center;justify-content:center;gap:48px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.3);
+}
+.ring{
+  width:18px;height:18px;border-radius:50%;
+  border:3px solid #8ab0d8;background:#d4c9b0;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,0.3),0 1px 0 rgba(255,255,255,0.2);
+  position:relative;
+}
+.ring::after{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:6px;height:6px;border-radius:50%;background:#8ab0d8;
+}
+
+/* ── NAV — COLLEGE ID CARD STYLE ── */
+nav{
+  position:fixed;top:28px;left:0;right:0;z-index:800;
+  background:var(--notebook);
+  padding:.6rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:4px solid #1a3a6b;
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+}
+.nav-logo{
+  font-family:'Permanent Marker',cursive;
+  font-size:1.4rem;color:#fff;letter-spacing:.05em;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.3);
+}
+.nav-logo span{color:#f9e84a;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{
+  font-family:'Kalam',cursive;font-size:.95rem;font-weight:700;
+  color:#b8d4ff;text-decoration:none;
+  transition:color .2s;letter-spacing:.03em;
+  position:relative;
+}
+.nav-links a:hover{color:#f9e84a;}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:2px;background:#f9e84a;transform:scaleX(0);transition:transform .2s;
+}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-date{
+  font-family:'Kalam',cursive;font-size:.85rem;color:#8ab0d8;
+}
+
+/* ── HERO — NOTEBOOK COVER ── */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:8rem 2rem 4rem;
+  position:relative;
+  overflow:hidden;
+}
+
+.notebook-cover{
+  width:min(860px,96vw);
+  background:var(--notebook);
+  border-radius:4px 16px 16px 4px;
+  box-shadow:
+    -8px 0 0 #0d2344,
+    -12px 0 0 #162d50,
+    -16px 4px 20px rgba(0,0,0,0.4),
+    4px 4px 30px rgba(0,0,0,0.3);
+  position:relative;
+  overflow:hidden;
+  min-height:520px;
+}
+
+/* spine */
+.nb-spine{
+  position:absolute;left:0;top:0;bottom:0;width:40px;
+  background:linear-gradient(90deg,#0d2344,#1a3a6b);
+  border-right:3px solid #0a1a2e;
+  display:flex;align-items:center;justify-content:center;
+}
+.nb-spine-text{
+  font-family:'Kalam',cursive;font-size:.7rem;color:#4a80c4;
+  writing-mode:vertical-rl;text-orientation:mixed;
+  letter-spacing:.15em;text-transform:uppercase;
+}
+
+/* cover texture */
+.nb-cover{
+  margin-left:40px;padding:3rem 3rem 3rem 2.5rem;
+  position:relative;
+}
+.nb-cover::before{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(
+    0deg,transparent,transparent 24px,rgba(255,255,255,0.03) 24px,rgba(255,255,255,0.03) 25px
+  );
+  pointer-events:none;
+}
+
+/* stickers */
+.sticker{
+  position:absolute;font-size:1.8rem;
+  animation:wobble 3s ease-in-out infinite;
+}
+.sticker:nth-child(1){top:1.5rem;right:2rem;animation-delay:0s;}
+.sticker:nth-child(2){top:1.5rem;right:5rem;animation-delay:.4s;}
+.sticker:nth-child(3){bottom:2rem;right:2rem;animation-delay:.8s;}
+@keyframes wobble{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+
+.nb-label{
+  display:inline-block;
+  background:#f5f0e8;
+  border:2px solid #ccc;
+  padding:1.5rem 2.5rem;
+  margin-bottom:1.5rem;
+  position:relative;
+  box-shadow:2px 2px 8px rgba(0,0,0,0.3);
+  transform:rotate(-1deg);
+}
+.nb-label::before{
+  content:'';position:absolute;
+  top:-8px;left:50%;transform:translateX(-50%);
+  width:40px;height:16px;
+  background:#f9e84a;border:1px solid #d4c000;
+  box-shadow:0 1px 3px rgba(0,0,0,0.2);
+}
+.nb-label .subject{
+  font-family:'Kalam',cursive;font-size:.75rem;font-weight:700;
+  color:var(--blue);text-transform:uppercase;letter-spacing:.15em;
+  margin-bottom:.3rem;
+}
+.nb-label .name{
+  font-family:'Permanent Marker',cursive;
+  font-size:clamp(2rem,5vw,3.2rem);
+  color:var(--ink);line-height:1;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.1);
+}
+.nb-label .roll{
+  font-family:'Kalam',cursive;font-size:.85rem;
+  color:var(--faded);margin-top:.4rem;
+}
+
+.nb-tagline{
+  font-family:'Caveat',cursive;font-size:1.5rem;font-weight:600;
+  color:#a8c8ff;margin-bottom:1.5rem;
+  text-shadow:1px 1px 0 rgba(0,0,0,0.2);
+}
+
+.nb-info-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:.6rem;
+  margin-bottom:2rem;
+}
+.nb-info-item{
+  display:flex;align-items:center;gap:.5rem;
+  font-family:'Kalam',cursive;font-size:.88rem;color:#8ab0d8;
+}
+.nb-info-item .lbl{color:#5580b0;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;}
+.nb-info-item a{color:#8ab0d8;text-decoration:none;}
+.nb-info-item a:hover{color:#f9e84a;text-decoration:underline;}
+
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-retro{
+  font-family:'Kalam',cursive;font-weight:700;
+  font-size:.9rem;padding:.6rem 1.6rem;
+  text-decoration:none;transition:all .15s;
+  display:inline-block;cursor:pointer;border:none;
+  position:relative;
+}
+.btn-chalk{
+  background:#f9e84a;color:var(--ink);
+  border:3px solid #d4c000;
+  box-shadow:3px 3px 0 rgba(0,0,0,0.3);
+}
+.btn-chalk:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 rgba(0,0,0,0.3);}
+.btn-chalk:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(0,0,0,0.3);}
+.btn-outline-chalk{
+  background:transparent;color:#b8d4ff;
+  border:2px dashed #4a70a0;
+}
+.btn-outline-chalk:hover{background:rgba(255,255,255,0.08);color:#f9e84a;border-color:#f9e84a;}
+
+/* ── STATS — REPORT CARD ── */
+.report-card{
+  position:absolute;bottom:-1.5rem;right:3rem;
+  background:var(--paper3);
+  border:1px solid var(--ruled);
+  padding:1rem 1.5rem;
+  transform:rotate(2deg);
+  box-shadow:3px 3px 10px rgba(0,0,0,0.3);
+  min-width:220px;
+}
+.rc-title{
+  font-family:'Special Elite',cursive;font-size:.65rem;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--red);border-bottom:1px solid var(--ruled);
+  padding-bottom:.4rem;margin-bottom:.7rem;
+  text-align:center;
+}
+.rc-row{
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'Kalam',cursive;font-size:.85rem;
+  margin-bottom:.3rem;
+  border-bottom:1px dotted var(--ruled);padding-bottom:.2rem;
+}
+.rc-subject{color:var(--faded);}
+.rc-grade{
+  font-family:'Permanent Marker',cursive;font-size:1rem;
+  color:var(--blue);
+}
+.rc-grade.a{color:var(--green);}
+.rc-grade.s{color:var(--red);}
+
+/* ── MAIN WRAPPER ── */
+.page-wrap{
+  max-width:1000px;margin:0 auto;
+  padding:3rem 1.5rem 4rem;
+  position:relative;
+}
+
+/* ── SECTION PAPER ── */
+.paper-section{
+  background:var(--paper3);
+  border:1px solid var(--ruled);
+  margin-bottom:3rem;
+  position:relative;
+  box-shadow:3px 3px 12px rgba(0,0,0,0.15),
+             inset 0 0 60px rgba(200,190,168,0.1);
+}
+
+/* ruled lines */
+.paper-section.ruled::before{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(
+    transparent,transparent 31px,var(--ruled) 31px,var(--ruled) 32px
+  );
+  background-position:0 48px;
+  pointer-events:none;opacity:.4;
+}
+
+/* red margin line */
+.paper-section.ruled::after{
+  content:'';position:absolute;
+  left:64px;top:0;bottom:0;width:1px;
+  background:rgba(192,57,43,0.25);pointer-events:none;
+}
+
+.section-inner{padding:2.5rem 2.5rem 2.5rem 5rem;}
+
+/* fold corner */
+.fold{
+  position:absolute;bottom:0;right:0;width:0;height:0;
+  border-style:solid;
+  border-width:0 0 40px 40px;
+  border-color:transparent transparent var(--paper2) transparent;
+  filter:drop-shadow(-2px -2px 3px rgba(0,0,0,0.15));
+}
+
+/* ── SECTION HEADER ── */
+.sec-head{
+  display:flex;align-items:flex-start;gap:1rem;
+  margin-bottom:2rem;
+  position:relative;
+}
+.sec-num-circle{
+  width:40px;height:40px;border-radius:50%;
+  border:2px solid var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Permanent Marker',cursive;font-size:1rem;
+  color:var(--blue);flex-shrink:0;
+  background:#fff;
+}
+.sec-title-wrap{}
+.sec-chapter{
+  font-family:'Kalam',cursive;font-size:.7rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.15em;color:var(--red);
+  margin-bottom:.1rem;
+}
+h2.sec-title{
+  font-family:'Permanent Marker',cursive;
+  font-size:clamp(1.4rem,3vw,2rem);
+  color:var(--ink);line-height:1;
+}
+.underline-wavy{
+  position:relative;display:inline-block;
+}
+.underline-wavy::after{
+  content:'';position:absolute;left:0;right:0;bottom:-4px;height:3px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='6'%3E%3Cpath d='M0 3 Q5 0 10 3 Q15 6 20 3' stroke='%23c0392b' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x;
+}
+
+/* ── ABOUT ── */
+.about-letter{
+  font-family:'Kalam',cursive;font-size:1rem;
+  line-height:2;color:var(--ink2);
+}
+.about-letter .big-cap{
+  font-family:'Permanent Marker',cursive;
+  font-size:3.5rem;line-height:1;float:left;
+  color:var(--blue);margin:0 .4rem 0 0;
+}
+.about-letter p{margin-bottom:.8rem;}
+.highlight-yellow{
+  background:var(--highlight);
+  padding:0 .2rem;
+  font-weight:700;
+}
+.highlight-blue{
+  background:var(--highlight2);
+  padding:0 .2rem;
+}
+.margin-note{
+  position:absolute;right:1.5rem;top:5rem;width:140px;
+  transform:rotate(3deg);
+  font-family:'Caveat',cursive;font-size:.85rem;
+  color:var(--red);line-height:1.5;
+  border:1px solid var(--red);padding:.5rem;
+  background:rgba(255,240,240,.8);
+}
+
+/* ── SKILLS — MIND MAP ── */
+.skills-notebook{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+}
+.skill-card-retro{
+  background:#fff;
+  border:1px solid var(--ruled);
+  padding:1.2rem;
+  position:relative;
+  box-shadow:2px 2px 6px rgba(0,0,0,0.08);
+  transition:transform .2s,box-shadow .2s;
+}
+.skill-card-retro:hover{transform:rotate(0deg) translateY(-4px);box-shadow:4px 6px 14px rgba(0,0,0,0.15);}
+/* tape effect */
+.tape{
+  position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  width:60px;height:20px;
+  background:rgba(249,232,74,0.7);
+  border:1px solid rgba(200,180,0,0.3);
+}
+.skill-cat-retro{
+  font-family:'Permanent Marker',cursive;
+  font-size:.9rem;color:var(--blue);
+  margin-top:.4rem;margin-bottom:.8rem;
+  border-bottom:2px solid var(--ruled);
+  padding-bottom:.4rem;
+}
+.skill-tags-retro{display:flex;flex-wrap:wrap;gap:.4rem;}
+.skill-tag-retro{
+  font-family:'Kalam',cursive;font-size:.82rem;
+  padding:.15rem .6rem;
+  background:var(--paper2);
+  border:1px solid var(--ruled);
+  color:var(--ink2);
+  transition:background .15s;
+}
+.skill-tag-retro:hover{background:var(--highlight);border-color:#d4c000;}
+/* random rotation on skill cards */
+.skill-card-retro:nth-child(1){transform:rotate(-1.5deg);}
+.skill-card-retro:nth-child(2){transform:rotate(.8deg);}
+.skill-card-retro:nth-child(3){transform:rotate(-1deg);}
+.skill-card-retro:nth-child(4){transform:rotate(1.2deg);}
+.skill-card-retro:nth-child(5){transform:rotate(-.7deg);}
+.skill-card-retro:nth-child(6){transform:rotate(1.5deg);}
+.skill-card-retro:hover{transform:rotate(0) translateY(-4px)!important;}
+
+/* ── PROJECTS — INDEX CARDS ── */
+.proj-pinboard{
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+}
+.index-card{
+  background:#fff;
+  border-top:6px solid var(--blue);
+  padding:1.5rem;
+  position:relative;
+  box-shadow:3px 4px 14px rgba(0,0,0,0.12);
+  transition:transform .2s,box-shadow .2s;
+}
+.index-card:nth-child(odd){transform:rotate(-.8deg);}
+.index-card:nth-child(even){transform:rotate(.6deg);}
+.index-card:hover{transform:rotate(0) translateY(-6px)!important;box-shadow:6px 10px 24px rgba(0,0,0,0.2);}
+.index-card:nth-child(1){border-top-color:var(--blue);}
+.index-card:nth-child(2){border-top-color:var(--red);}
+.index-card:nth-child(3){border-top-color:var(--green);}
+.index-card:nth-child(4){border-top-color:#7b3a8e;}
+.index-card:nth-child(5){border-top-color:#c47a00;grid-column:1/-1;}
+
+/* pushpin */
+.pushpin{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  width:20px;height:20px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ff6b6b,#c0392b);
+  box-shadow:0 3px 6px rgba(0,0,0,0.3);
+  z-index:2;
+}
+.pushpin::after{
+  content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
+  width:4px;height:8px;background:#8b1a1a;border-radius:0 0 2px 2px;
+}
+
+.card-date{
+  font-family:'Kalam',cursive;font-size:.72rem;
+  color:var(--faded2);float:right;
+  background:var(--paper2);padding:.1rem .4rem;
+  border:1px solid var(--ruled);
+}
+.card-tag{
+  font-family:'Kalam',cursive;font-size:.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;
+  color:var(--red);margin-bottom:.4rem;display:block;clear:both;
+}
+.index-card h3{
+  font-family:'Permanent Marker',cursive;
+  font-size:1rem;color:var(--ink);
+  margin-bottom:.7rem;line-height:1.3;
+}
+.index-card p{
+  font-family:'Kalam',cursive;font-size:.88rem;
+  line-height:1.75;color:var(--ink2);
+  margin-bottom:.8rem;
+  border-bottom:1px dotted var(--ruled);
+  padding-bottom:.7rem;
+}
+.card-tech{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem;}
+.tech-sticker{
+  font-family:'Kalam',cursive;font-size:.72rem;
+  padding:.15rem .55rem;
+  border-radius:2px;
+  font-weight:700;
+}
+.tech-sticker:nth-child(4n+1){background:#dbeafe;color:#1e3a8a;border:1px solid #93c5fd;}
+.tech-sticker:nth-child(4n+2){background:#dcfce7;color:#14532d;border:1px solid #86efac;}
+.tech-sticker:nth-child(4n+3){background:#fef9c3;color:#713f12;border:1px solid #fde047;}
+.tech-sticker:nth-child(4n+0){background:#fce7f3;color:#831843;border:1px solid #f9a8d4;}
+
+/* ── TIMELINE — DIARY ENTRIES ── */
+.diary{display:flex;flex-direction:column;gap:2rem;}
+.diary-entry{
+  display:grid;grid-template-columns:120px 1fr;gap:1.5rem;
+  align-items:start;
+}
+.diary-date-stamp{
+  text-align:center;
+  background:var(--blue);
+  color:#fff;padding:.8rem .5rem;
+  position:relative;
+  box-shadow:2px 2px 8px rgba(0,0,0,0.2);
+}
+.diary-date-stamp .month{
+  font-family:'Kalam',cursive;font-size:.72rem;
+  text-transform:uppercase;letter-spacing:.12em;
+  opacity:.8;
+}
+.diary-date-stamp .year{
+  font-family:'Permanent Marker',cursive;font-size:1.4rem;
+  line-height:1;
+}
+.diary-date-stamp::after{
+  content:'';position:absolute;right:-8px;top:50%;transform:translateY(-50%);
+  width:0;height:0;border-style:solid;
+  border-width:10px 0 10px 8px;
+  border-color:transparent transparent transparent var(--blue);
+}
+.diary-content{
+  background:#fff;padding:1.2rem 1.5rem;
+  border:1px solid var(--ruled);
+  position:relative;
+}
+.diary-content::before{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(transparent,transparent 27px,var(--ruled) 27px,var(--ruled) 28px);
+  opacity:.3;pointer-events:none;
+}
+.diary-org{
+  font-family:'Kalam',cursive;font-size:.75rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--red);
+  margin-bottom:.3rem;
+}
+.diary-content h3{
+  font-family:'Permanent Marker',cursive;font-size:1.05rem;
+  color:var(--ink);margin-bottom:.5rem;
+}
+.diary-content p{
+  font-family:'Kalam',cursive;font-size:.9rem;
+  line-height:1.85;color:var(--ink2);
+}
+
+/* ── CERTS — WALL OF FAME ── */
+.certs-wall{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.8rem;
+}
+.cert-ribbon{
+  background:#fff;
+  border:1px solid var(--ruled);
+  padding:1.5rem 1.5rem 1rem;
+  position:relative;text-align:center;
+  box-shadow:2px 3px 10px rgba(0,0,0,0.1);
+  transition:transform .2s,box-shadow .2s;
+}
+.cert-ribbon:hover{transform:translateY(-4px);box-shadow:4px 8px 20px rgba(0,0,0,0.18);}
+/* ribbon top */
+.cert-ribbon::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:8px;
+  background:repeating-linear-gradient(90deg,var(--blue) 0,var(--blue) 20px,var(--red) 20px,var(--red) 40px);
+}
+.cert-star{font-size:2rem;margin-bottom:.5rem;display:block;}
+.cert-issuer-badge{
+  display:inline-block;
+  font-family:'Kalam',cursive;font-size:.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;
+  background:var(--blue);color:#fff;
+  padding:.15rem .6rem;margin-bottom:.6rem;
+}
+.cert-ribbon h3{
+  font-family:'Kalam',cursive;font-size:.9rem;font-weight:700;
+  color:var(--ink);line-height:1.4;margin-bottom:.5rem;
+}
+.cert-year{
+  font-family:'Permanent Marker',cursive;font-size:.9rem;color:var(--red);
+}
+/* seal */
+.cert-seal{
+  position:absolute;bottom:.8rem;right:.8rem;
+  width:38px;height:38px;border-radius:50%;
+  border:2px solid var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Permanent Marker',cursive;font-size:.5rem;
+  color:var(--red);text-align:center;line-height:1.2;
+  transform:rotate(-15deg);
+  opacity:.6;
+}
+
+/* ── ACHIEVEMENTS — TROPHY SHELF ── */
+.trophy-shelf{
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+  padding-top:1rem;
+}
+.trophy-block{
+  background:#fff;
+  border:2px solid var(--ruled);
+  padding:2rem;text-align:center;
+  position:relative;
+  box-shadow:3px 3px 10px rgba(0,0,0,0.1);
+  transition:transform .2s;
+}
+.trophy-block:hover{transform:translateY(-4px);}
+.trophy-icon{font-size:3rem;display:block;margin-bottom:.8rem;}
+.trophy-num{
+  font-family:'Permanent Marker',cursive;
+  font-size:3rem;color:var(--blue);
+  line-height:1;text-shadow:2px 2px 0 rgba(0,0,70,.15);
+}
+.trophy-label{
+  font-family:'Kalam',cursive;font-size:.85rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--faded);margin:-.1rem 0 .6rem;
+}
+.trophy-desc{
+  font-family:'Kalam',cursive;font-size:.88rem;
+  line-height:1.75;color:var(--ink2);
+}
+/* shelf plank */
+.trophy-block::after{
+  content:'';position:absolute;bottom:-8px;left:-4px;right:-4px;
+  height:8px;background:linear-gradient(#8b6914,#6b4e10);
+  border-radius:0 0 3px 3px;
+  box-shadow:0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ── EDUCATION — TRANSCRIPTS ── */
+.transcript{border:1px solid var(--ruled);background:#fff;}
+.transcript-header{
+  background:var(--blue);color:#fff;
+  padding:1rem 1.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.transcript-header h3{
+  font-family:'Special Elite',cursive;font-size:1rem;letter-spacing:.05em;
+}
+.transcript-header span{
+  font-family:'Kalam',cursive;font-size:.75rem;opacity:.7;
+}
+.transcript-row{
+  display:grid;grid-template-columns:1fr auto auto;gap:1rem;
+  padding:1.2rem 1.5rem;border-bottom:1px solid var(--ruled);
+  align-items:center;transition:background .15s;
+}
+.transcript-row:last-child{border-bottom:none;}
+.transcript-row:hover{background:var(--paper2);}
+.tr-school{font-family:'Kalam',cursive;font-size:.92rem;font-weight:700;color:var(--ink);}
+.tr-degree{font-family:'Patrick Hand',cursive;font-size:.82rem;color:var(--faded);margin-top:.2rem;}
+.tr-loc{font-family:'Kalam',cursive;font-size:.72rem;color:var(--faded2);}
+.tr-grade{
+  font-family:'Permanent Marker',cursive;font-size:1.2rem;
+  color:var(--green);white-space:nowrap;
+}
+.tr-period{
+  font-family:'Kalam',cursive;font-size:.75rem;
+  color:var(--faded2);text-align:right;white-space:nowrap;
+}
+
+/* ── QUIZ — EXAM PAPER ── */
+.exam-paper{
+  background:#fff;
+  border:1px solid #aaa;
+  position:relative;
+}
+.exam-header{
+  background:var(--paper2);
+  border-bottom:2px solid #aaa;
+  padding:1.2rem 2rem;
+  display:grid;grid-template-columns:1fr auto;gap:1rem;
+  align-items:center;
+}
+.exam-title{
+  font-family:'Special Elite',cursive;
+  font-size:1.1rem;color:var(--ink);
+  letter-spacing:.04em;
+}
+.exam-meta{
+  font-family:'Kalam',cursive;font-size:.78rem;color:var(--faded);
+  text-align:right;
+}
+.exam-meta span{display:block;}
+.exam-meta .marks{font-family:'Permanent Marker',cursive;font-size:1rem;color:var(--red);}
+
+.exam-body{padding:2rem;}
+.exam-instr{
+  font-family:'Kalam',cursive;font-size:.82rem;
+  color:var(--faded);border:1px solid var(--ruled);
+  padding:.7rem 1rem;margin-bottom:2rem;
+  background:var(--paper2);
+  line-height:1.7;
+}
+.exam-instr strong{color:var(--red);}
+
+.q-wrap{margin-bottom:1.5rem;}
+.q-num-row{
+  display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;
+}
+.q-num{
+  font-family:'Permanent Marker',cursive;font-size:1.1rem;
+  color:var(--blue);min-width:28px;
+}
+#quiz-question{
+  font-family:'Kalam',cursive;font-size:1.05rem;font-weight:700;
+  color:var(--ink);line-height:1.5;
+}
+
+.quiz-opts{display:flex;flex-direction:column;gap:.6rem;padding-left:2.5rem;}
+.qopt{
+  display:flex;align-items:center;gap:.8rem;
+  padding:.65rem 1rem;
+  border:1px solid var(--ruled);
+  background:var(--paper3);
+  cursor:pointer;
+  font-family:'Kalam',cursive;font-size:.95rem;color:var(--ink2);
+  transition:all .15s;
+  line-height:1.4;
+}
+.qopt:hover:not(.disabled){
+  background:var(--highlight);
+  border-color:#d4c000;
+  transform:translateX(4px);
+}
+.qopt.correct{background:#dcfce7;border-color:#16a34a;color:#14532d;}
+.qopt.wrong{background:#fee2e2;border-color:#dc2626;color:#7f1d1d;}
+.qopt.disabled{cursor:default;}
+.qopt-letter{
+  font-family:'Permanent Marker',cursive;font-size:.9rem;
+  color:var(--blue);min-width:20px;
+}
+.qopt.correct .qopt-letter{color:#14532d;}
+.qopt.wrong .qopt-letter{color:#7f1d1d;}
+
+.quiz-feedback{
+  font-family:'Kalam',cursive;font-size:.9rem;line-height:1.7;
+  color:var(--ink2);margin:1rem 0 0 2.5rem;
+  padding:.8rem 1rem;
+  background:#fffbeb;border-left:3px solid #f9e84a;
+  display:none;
+}
+.quiz-feedback strong{color:var(--ink);}
+
+.quiz-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 2rem;
+  background:var(--paper2);
+  border-top:1px solid var(--ruled);
+}
+.quiz-score-display{
+  font-family:'Kalam',cursive;font-size:.85rem;color:var(--faded);
+}
+.quiz-score-display strong{
+  font-family:'Permanent Marker',cursive;font-size:1.1rem;color:var(--blue);
+}
+.quiz-hint-txt{
+  font-family:'Caveat',cursive;font-size:.85rem;color:var(--red);
+  font-style:italic;
+}
+#quiz-next{
+  font-family:'Permanent Marker',cursive;font-size:.85rem;
+  padding:.5rem 1.5rem;background:var(--blue);color:#fff;
+  border:none;cursor:pointer;
+  box-shadow:2px 2px 0 rgba(0,0,50,.3);
+  transition:all .15s;display:none;
+}
+#quiz-next:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 rgba(0,0,50,.3);}
+
+.quiz-progress-bar{
+  height:6px;background:var(--ruled);overflow:hidden;
+}
+.quiz-progress-fill{
+  height:100%;background:var(--blue);width:0%;
+  transition:width .4s ease;
+}
+
+/* RESULTS */
+#quiz-results{
+  display:none;padding:2.5rem;text-align:center;
+  background:#fff;
+}
+.result-stamp{
+  display:inline-block;
+  border:4px solid var(--red);
+  padding:1rem 2rem;
+  transform:rotate(-8deg);
+  font-family:'Permanent Marker',cursive;
+  font-size:2.5rem;color:var(--red);
+  margin-bottom:1.5rem;
+  opacity:.9;
+  text-shadow:1px 1px 0 rgba(192,57,43,.2);
+  box-shadow:inset 0 0 20px rgba(192,57,43,.08);
+}
+.result-score-num{
+  font-family:'Permanent Marker',cursive;
+  font-size:3rem;color:var(--blue);
+  display:block;margin-bottom:.3rem;
+}
+.result-msg{
+  font-family:'Kalam',cursive;font-size:1rem;
+  color:var(--ink2);line-height:1.75;
+  max-width:420px;margin:0 auto 1.5rem;
+}
+.result-msg strong{color:var(--ink);}
+.badge-row{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.badge{
+  font-family:'Kalam',cursive;font-size:.78rem;
+  padding:.3rem .8rem;border:1px solid var(--ruled);
+  color:var(--faded2);
+}
+.badge.earned{
+  background:#fffbeb;border-color:#d4c000;color:#713f12;
+  font-weight:700;
+}
+.round-info{
+  font-family:'Caveat',cursive;font-size:.85rem;color:var(--faded2);
+  margin-bottom:1.5rem;
+}
+#quiz-restart{
+  font-family:'Permanent Marker',cursive;font-size:.9rem;
+  padding:.6rem 2rem;
+  background:var(--blue);color:#fff;border:none;cursor:pointer;
+  box-shadow:3px 3px 0 rgba(0,0,50,.3);transition:all .15s;
+}
+#quiz-restart:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 rgba(0,0,50,.3);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--notebook);
+  color:#8ab0d8;
+  padding:2rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:4px solid #1a3a6b;
+}
+footer p{font-family:'Kalam',cursive;font-size:.85rem;}
+.ft-links{display:flex;gap:1.8rem;}
+footer a{font-family:'Kalam',cursive;font-size:.85rem;color:#8ab0d8;text-decoration:none;transition:color .2s;}
+footer a:hover{color:#f9e84a;}
+
+/* doodles */
+.doodle{
+  position:absolute;font-size:1.2rem;opacity:.18;
+  pointer-events:none;user-select:none;
+  font-family:'Permanent Marker',cursive;color:var(--blue);
+}
+
+@media(max-width:768px){
+  nav{padding:.6rem 1rem;}
+  .nav-links,.nav-date{display:none;}
+  .notebook-cover{border-radius:4px 8px 8px 4px;}
+  .nb-cover{padding:2rem 1.5rem 2rem 2rem;}
+  .skills-notebook,.proj-pinboard,.trophy-shelf{grid-template-columns:1fr;}
+  .index-card:nth-child(5){grid-column:auto;}
+  .diary-entry{grid-template-columns:80px 1fr;gap:1rem;}
+  .section-inner{padding:2rem 1.5rem 2rem 2.5rem;}
+  footer{flex-direction:column;gap:1rem;padding:1.5rem;}
+  .report-card{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- RINGS -->
+<div class="rings-bar">
+  <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+  <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">📓 <span>Sairam</span>'s Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#training">Training</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+  <div class="nav-date" id="nav-date">Loading...</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="notebook-cover">
+    <div class="nb-spine">
+      <div class="nb-spine-text">CSE · LPU · 2023</div>
+    </div>
+    <div class="nb-cover">
+      <div class="sticker">⭐</div>
+      <div class="sticker">💻</div>
+      <div class="sticker">🏆</div>
+
+      <div class="nb-label">
+        <div class="subject">Subject: Computer Science &amp; Engineering</div>
+        <div class="name">A. Sairam Patro</div>
+        <div class="roll">Roll No: LPU-CSE-2023 &nbsp;|&nbsp; CGPA: 8.27</div>
+      </div>
+
+      <div class="nb-tagline">Developer · Data Analyst · Problem Solver ✏️</div>
+
+      <div class="nb-info-grid">
+        <div class="nb-info-item"><span class="lbl">Email:</span><a href="mailto:sairam.patro000@gmail.com">sairam.patro000@gmail.com</a></div>
+        <div class="nb-info-item"><span class="lbl">Mobile:</span> +91 8260979884</div>
+        <div class="nb-info-item"><span class="lbl">GitHub:</span><a href="https://github.com/Sairam-Patro" target="_blank">github.com/Sairam-Patro</a></div>
+        <div class="nb-info-item"><span class="lbl">LinkedIn:</span><a href="https://linkedin.com/in/sairam-patro/" target="_blank">linkedin.com/in/sairam-patro</a></div>
+      </div>
+
+      <div class="hero-btns">
+        <a href="mailto:sairam.patro000@gmail.com" class="btn-retro btn-chalk">✉ Say Hello!</a>
+        <a href="https://github.com/Sairam-Patro" target="_blank" class="btn-retro btn-outline-chalk">GitHub ↗</a>
+        <a href="https://linkedin.com/in/sairam-patro/" target="_blank" class="btn-retro btn-outline-chalk">LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <!-- REPORT CARD -->
+    <div class="report-card">
+      <div class="rc-title">📋 Quick Report Card</div>
+      <div class="rc-row"><span class="rc-subject">CGPA</span><span class="rc-grade a">8.27</span></div>
+      <div class="rc-row"><span class="rc-subject">LeetCode</span><span class="rc-grade a">300+</span></div>
+      <div class="rc-row"><span class="rc-subject">Training</span><span class="rc-grade a">140h</span></div>
+      <div class="rc-row"><span class="rc-subject">Projects</span><span class="rc-grade a">5</span></div>
+      <div class="rc-row"><span class="rc-subject">NPTEL</span><span class="rc-grade s">ELITE</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="page-wrap">
+
+  <!-- ABOUT -->
+  <div class="paper-section ruled reveal" id="about">
+    <div class="section-inner">
+      <div class="sec-head">
+        <div class="sec-num-circle">1</div>
+        <div class="sec-title-wrap">
+          <div class="sec-chapter">Chapter One</div>
+          <h2 class="sec-title"><span class="underline-wavy">About Me</span></h2>
+        </div>
+      </div>
+      <div class="about-letter">
+        <p><span class="big-cap">H</span>ey there! I'm <span class="highlight-yellow">A. Sairam Patro</span>, a B.Tech Computer Science student at <span class="highlight-blue">Lovely Professional University, Punjab</span>. Originally from the beautiful city of <strong>Berhampur, Odisha</strong>, I packed my bags in 2023 and set out to build something meaningful with code.</p>
+        <p>My world sits at the crossroads of <span class="highlight-yellow">systems programming</span> and <span class="highlight-blue">data analytics</span> — I love both writing efficient C++ algorithms AND turning messy data into beautiful Power BI dashboards.</p>
+        <p>Outside class, you'll find me grinding <strong>LeetCode puzzles</strong> (300+ solved and counting! 🎯), building side projects, and collecting certificates like they're Pokémon cards. My <strong>NPTEL Elite Award</strong> among 12,697 students is probably my favourite trophy on the shelf.</p>
+      </div>
+      <div class="doodle" style="bottom:2rem;right:6rem;font-size:2.5rem;opacity:.12;transform:rotate(15deg)">✏️</div>
+    </div>
+    <div class="fold"></div>
+    <div class="margin-note">⭐ Star student from Odisha! Moved to Punjab to chase dreams 🌟</div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="paper-section reveal" id="skills">
+    <div class="section-inner">
+      <div class="sec-head">
+        <div class="sec-num-circle">2</div>
+        <div class="sec-title-wrap">
+          <div class="sec-chapter">Chapter Two</div>
+          <h2 class="sec-title"><span class="underline-wavy">My Skill Set</span></h2>
+        </div>
+      </div>
+      <div class="skills-notebook">
+        <div class="skill-card-retro">
+          <div class="tape"></div>
+          <div class="skill-cat-retro">💻 Languages</div>
+          <div class="skill-tags-retro">
+            <span class="skill-tag-retro">C</span><span class="skill-tag-retro">C++</span>
+            <span class="skill-tag-retro">Java</span><span class="skill-tag-retro">Python</span>
+          </div>
+        </div>
+        <div class="skill-card-retro">
+          <div class="tape"></div>
+          <div class="skill-cat-retro">🌐 Web Tech</div>
+          <div class="skill-tags-retro">
+            <span class="skill-tag-retro">HTML</span><span class="skill-tag-retro">CSS</span>
+            <span class="skill-tag-retro">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-card-retro">
+          <div class="tape"></div>
+          <div class="skill-cat-retro">📊 Data & Viz</div>
+          <div class="skill-tags-retro">
+            <span class="skill-tag-retro">Power BI</span><span class="skill-tag-retro">DAX</span>
+            <span class="skill-tag-retro">Power Query</span><span class="skill-tag-retro">Excel</span>
+          </div>
+        </div>
+        <div class="skill-card-retro">
+          <div class="tape"></div>
+          <div class="skill-cat-retro">🔧 Tools</div>
+          <div class="skill-tags-retro">
+            <span class="skill-tag-retro">Git</span><span class="skill-tag-retro">GitHub</span>
+            <span class="skill-tag-retro">MySQL</span><span class="skill-tag-retro">Linux</span>
+            <span class="skill-tag-retro">Maven</span>
+          </div>
+        </div>
+        <div class="skill-card-retro">
+          <div class="tape"></div>
+          <div class="skill-cat-retro">🧠 CS Fundamentals</div>
+          <div class="skill-tags-retro">
+            <span class="skill-tag-retro">DSA</span><span class="skill-tag-retro">OOP</span>
+            <span class="skill-tag-retro">STL</span><span class="skill-tag-retro">Hashing</span>
+          </div>
+        </div>
+        <div class="skill-card-retro">
+          <div class="tape"></div>
+          <div class="skill-cat-retro">🤝 Soft Skills</div>
+          <div class="skill-tags-retro">
+            <span class="skill-tag-retro">Communication</span>
+            <span class="skill-tag-retro">Critical Thinking</span>
+            <span class="skill-tag-retro">Teamwork</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fold"></div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="paper-section reveal" id="projects">
+    <div class="section-inner">
+      <div class="sec-head">
+        <div class="sec-num-circle">3</div>
+        <div class="sec-title-wrap">
+          <div class="sec-chapter">Chapter Three</div>
+          <h2 class="sec-title"><span class="underline-wavy">Projects</span></h2>
+        </div>
+      </div>
+      <div class="proj-pinboard">
+
+        <div class="index-card">
+          <div class="pushpin"></div>
+          <div class="card-date">Oct 2025</div>
+          <span class="card-tag">📊 Data Analytics</span>
+          <h3>Tuber Service Analytics Dashboard</h3>
+          <p>Interactive Power BI dashboard to analyze Tuber ride data — trip volume, fare, distance, driver performance. Cleaned data with Power Query; dynamic KPIs and slicers.</p>
+          <div class="card-tech">
+            <span class="tech-sticker">Power BI</span><span class="tech-sticker">Power Query</span>
+            <span class="tech-sticker">DAX</span><span class="tech-sticker">Excel/CSV</span>
+          </div>
+        </div>
+
+        <div class="index-card">
+          <div class="pushpin" style="background:radial-gradient(circle at 35% 35%,#6ba3e8,#2c5282);"></div>
+          <div class="card-date">Apr 2025</div>
+          <span class="card-tag">🤖 AI / Web</span>
+          <h3>Stress Relief Chatbot</h3>
+          <p>Web chatbot using Gemini API for AI-powered mental wellness advice. Real-time message handling with a friendly, accessible UI/UX design.</p>
+          <div class="card-tech">
+            <span class="tech-sticker">HTML</span><span class="tech-sticker">CSS</span>
+            <span class="tech-sticker">JavaScript</span><span class="tech-sticker">Gemini API</span>
+          </div>
+        </div>
+
+        <div class="index-card">
+          <div class="pushpin" style="background:radial-gradient(circle at 35% 35%,#6bcf8a,#1a5c2e);"></div>
+          <div class="card-date">Mar 2025</div>
+          <span class="card-tag">⚙️ Systems</span>
+          <h3>CPU Scheduler Simulator</h3>
+          <p>Web simulator for FCFS, SJF, SRTF, Priority, and Round Robin scheduling — with Gantt charts and turnaround/wait time outputs. Great for OS class revision!</p>
+          <div class="card-tech">
+            <span class="tech-sticker">HTML</span><span class="tech-sticker">CSS</span>
+            <span class="tech-sticker">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="index-card">
+          <div class="pushpin" style="background:radial-gradient(circle at 35% 35%,#c084fc,#7b3a8e);"></div>
+          <div class="card-date">Mar 2025</div>
+          <span class="card-tag">📈 Analytics</span>
+          <h3>Air Quality Analysis Dashboard</h3>
+          <p>Excel dashboard using Pivot Tables for NYC air quality data — pollutant levels, health indicators across boroughs with region-wise slicers and filters.</p>
+          <div class="card-tech">
+            <span class="tech-sticker">Excel</span><span class="tech-sticker">Pivot Tables</span>
+            <span class="tech-sticker">Pivot Charts</span>
+          </div>
+        </div>
+
+        <div class="index-card">
+          <div class="pushpin" style="background:radial-gradient(circle at 35% 35%,#fbbf24,#c47a00);"></div>
+          <div class="card-date">Mar 2025</div>
+          <span class="card-tag">📚 C++ / OOP</span>
+          <h3>Library Management System</h3>
+          <p>Console-based C++ system for managing books and members — add, delete, search, issue and return. OOP design with STL vectors, lists, and hashing for O(1) lookups.</p>
+          <div class="card-tech">
+            <span class="tech-sticker">C++</span><span class="tech-sticker">OOP</span>
+            <span class="tech-sticker">STL</span><span class="tech-sticker">Hashing</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="fold"></div>
+  </div>
+
+  <!-- TRAINING -->
+  <div class="paper-section ruled reveal" id="training">
+    <div class="section-inner">
+      <div class="sec-head">
+        <div class="sec-num-circle">4</div>
+        <div class="sec-title-wrap">
+          <div class="sec-chapter">Chapter Four</div>
+          <h2 class="sec-title"><span class="underline-wavy">Training Log</span></h2>
+        </div>
+      </div>
+      <div class="diary">
+        <div class="diary-entry">
+          <div class="diary-date-stamp">
+            <div class="month">Jul</div>
+            <div class="year">2025</div>
+          </div>
+          <div class="diary-content">
+            <div class="diary-org">ByteXL</div>
+            <h3>Coding Practice &amp; DSA Training</h3>
+            <p>Completed over <span class="highlight-yellow">140+ hours</span> of intensive, industry-led training in competitive programming and algorithmic problem-solving. Hands-on coding challenges and real-world simulations using C++. The grind that built the foundation! 💪</p>
+          </div>
+        </div>
+        <div class="diary-entry">
+          <div class="diary-date-stamp" style="background:var(--red);">
+            <div class="month">Mar</div>
+            <div class="year">2024</div>
+          </div>
+          <div class="diary-content">
+            <div class="diary-org">CSE Pathshala</div>
+            <h3>Mastering in C: Basic to Beyond</h3>
+            <p>Deep-dived into C fundamentals — variables, data types, loops, functions, pointers, recursion, and modular design. Strengthened debugging instincts through mini-challenges. This is where the love for programming really began! ✨</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fold"></div>
+  </div>
+
+  <!-- CERTS -->
+  <div class="paper-section reveal" id="certs">
+    <div class="section-inner">
+      <div class="sec-head">
+        <div class="sec-num-circle">5</div>
+        <div class="sec-title-wrap">
+          <div class="sec-chapter">Chapter Five</div>
+          <h2 class="sec-title"><span class="underline-wavy">Certifications</span> 🏅</h2>
+        </div>
+      </div>
+      <div class="certs-wall">
+        <div class="cert-ribbon">
+          <span class="cert-star">🎓</span>
+          <div class="cert-issuer-badge">Infosys Springboard</div>
+          <h3>Computational Theory: Language Principle &amp; Finite Automata</h3>
+          <div class="cert-year">Aug 2025</div>
+          <div class="cert-seal">CERT<br>✓</div>
+        </div>
+        <div class="cert-ribbon">
+          <span class="cert-star">🤖</span>
+          <div class="cert-issuer-badge">Infosys</div>
+          <h3>Master Generative AI &amp; Generative AI Tools</h3>
+          <div class="cert-year">Aug 2025</div>
+          <div class="cert-seal">CERT<br>✓</div>
+        </div>
+        <div class="cert-ribbon">
+          <span class="cert-star">⚡</span>
+          <div class="cert-issuer-badge">Infosys</div>
+          <h3>Build Generative AI Apps with No-Code Tools</h3>
+          <div class="cert-year">Aug 2025</div>
+          <div class="cert-seal">CERT<br>✓</div>
+        </div>
+        <div class="cert-ribbon">
+          <span class="cert-star">🔒</span>
+          <div class="cert-issuer-badge">NPTEL</div>
+          <h3>Privacy and Security in Online Social Media</h3>
+          <div class="cert-year">Apr–May 2025</div>
+          <div class="cert-seal">CERT<br>✓</div>
+        </div>
+        <div class="cert-ribbon">
+          <span class="cert-star">💾</span>
+          <div class="cert-issuer-badge">CSE Pathshala</div>
+          <h3>Mastering in C: Basics to Beyond</h3>
+          <div class="cert-year">Mar 2025</div>
+          <div class="cert-seal">CERT<br>✓</div>
+        </div>
+      </div>
+    </div>
+    <div class="fold"></div>
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <div class="paper-section reveal">
+    <div class="section-inner">
+      <div class="sec-head">
+        <div class="sec-num-circle">6</div>
+        <div class="sec-title-wrap">
+          <div class="sec-chapter">Chapter Six</div>
+          <h2 class="sec-title"><span class="underline-wavy">Achievements</span> 🏆</h2>
+        </div>
+      </div>
+      <div class="trophy-shelf">
+        <div class="trophy-block">
+          <span class="trophy-icon">⚡</span>
+          <div class="trophy-num" id="leet-count">0+</div>
+          <div class="trophy-label">LeetCode Problems Solved</div>
+          <div class="trophy-desc">Built strong problem-solving muscles — 300+ algorithmic challenges across DSA, dynamic programming, graphs, and more. Consistent daily practice!</div>
+        </div>
+        <div class="trophy-block">
+          <span class="trophy-icon">🏆</span>
+          <div class="trophy-num">ELITE</div>
+          <div class="trophy-label">NPTEL Elite Award · May 2025</div>
+          <div class="trophy-desc">Placed among elite performers nationwide out of 12,697 participants in Privacy and Security in Online Social Media. Top of the class! 🌟</div>
+        </div>
+      </div>
+    </div>
+    <div class="fold"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="paper-section reveal" id="quiz">
+    <div class="section-inner" style="padding-right:2.5rem;">
+      <div class="sec-head">
+        <div class="sec-num-circle">7</div>
+        <div class="sec-title-wrap">
+          <div class="sec-chapter">Surprise Test! 📝</div>
+          <h2 class="sec-title"><span class="underline-wavy">How Well Do You Know Sairam?</span></h2>
+        </div>
+      </div>
+      <div style="font-family:'Kalam',cursive;font-size:.95rem;color:var(--faded);margin-bottom:2rem;line-height:1.7;">
+        <strong style="color:var(--red);">Instructions:</strong> Each round picks <strong>7 random questions</strong> from a bank of <strong>20</strong> — and the options shuffle too! Every restart gives you a completely fresh set. Read the portfolio carefully before attempting. 😄
+      </div>
+
+      <div class="exam-paper">
+        <div class="exam-header">
+          <div>
+            <div class="exam-title">📄 Portfolio Knowledge Test — A. Sairam Patro</div>
+            <div style="font-family:'Kalam',cursive;font-size:.78rem;color:var(--faded);margin-top:.3rem;">
+              <span id="quiz-q-num">1</span> of 7 Questions &nbsp;|&nbsp; Choose the correct option
+            </div>
+          </div>
+          <div class="exam-meta">
+            <span>Max Marks: 7</span>
+            <span>Obtained: <span class="marks" id="quiz-score-live">0</span></span>
+          </div>
+        </div>
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="qprog"></div></div>
+
+        <div id="quiz-card" class="exam-body">
+          <div class="exam-instr">
+            💡 <strong>Hint:</strong> <span id="quiz-hint">Read the portfolio carefully!</span>
+          </div>
+          <div class="q-wrap">
+            <div class="q-num-row">
+              <span class="q-num">Q.</span>
+              <div id="quiz-question">Loading...</div>
+            </div>
+            <div class="quiz-opts" id="quiz-opts"></div>
+            <div class="quiz-feedback" id="quiz-feedback"></div>
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <div class="quiz-score-display">Score: <strong id="score-footer">0</strong> / 7</div>
+          <button id="quiz-next" onclick="nextQ()">Next Question →</button>
+        </div>
+
+        <!-- RESULTS -->
+        <div id="quiz-results">
+          <div class="result-stamp" id="result-stamp-text">PASS!</div>
+          <span class="result-score-num" id="result-score">0/7</span>
+          <div class="badge-row" id="badge-row"></div>
+          <div class="result-msg" id="result-msg"></div>
+          <div class="round-info" id="round-info"></div>
+          <button id="quiz-restart" onclick="restartQuiz()">📝 Try New Round</button>
+        </div>
+      </div>
+    </div>
+    <div class="fold"></div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="paper-section reveal" id="education">
+    <div class="section-inner">
+      <div class="sec-head">
+        <div class="sec-num-circle">8</div>
+        <div class="sec-title-wrap">
+          <div class="sec-chapter">Chapter Eight</div>
+          <h2 class="sec-title"><span class="underline-wavy">Education</span> 🎓</h2>
+        </div>
+      </div>
+      <div class="transcript">
+        <div class="transcript-header">
+          <h3>📋 Academic Transcript — A. Sairam Patro</h3>
+          <span>Verified Records</span>
+        </div>
+        <div class="transcript-row">
+          <div>
+            <div class="tr-school">Lovely Professional University</div>
+            <div class="tr-degree">B.Tech — Computer Science &amp; Engineering</div>
+            <div class="tr-loc">📍 Phagwara, Punjab</div>
+          </div>
+          <div class="tr-grade">8.27</div>
+          <div class="tr-period">Aug 2023 –<br>Present</div>
+        </div>
+        <div class="transcript-row">
+          <div>
+            <div class="tr-school">Mount Litera Zee School</div>
+            <div class="tr-degree">12th — Science Stream</div>
+            <div class="tr-loc">📍 Berhampur, Odisha</div>
+          </div>
+          <div class="tr-grade">76%</div>
+          <div class="tr-period">Mar 2021 –<br>Mar 2023</div>
+        </div>
+        <div class="transcript-row">
+          <div>
+            <div class="tr-school">St. Xavier's High School</div>
+            <div class="tr-degree">10th — Matriculation</div>
+            <div class="tr-loc">📍 Berhampur, Odisha</div>
+          </div>
+          <div class="tr-grade">81%</div>
+          <div class="tr-period">Mar 2020 –<br>Mar 2021</div>
+        </div>
+      </div>
+    </div>
+    <div class="fold"></div>
+  </div>
+
+</div><!-- page-wrap -->
+
+<footer>
+  <p>📓 A. Sairam Patro · sairam.patro000@gmail.com · +91 8260979884</p>
+  <div class="ft-links">
+    <a href="https://github.com/Sairam-Patro" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/sairam-patro/" target="_blank">LinkedIn</a>
+    <a href="mailto:sairam.patro000@gmail.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ── DATE ──
+const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const d=new Date();
+document.getElementById('nav-date').textContent=months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+
+// ── SCROLL REVEAL ──
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── LEET COUNTER ──
+function animCount(el,target,dur){
+  const s=performance.now();
+  (function step(now){const t=Math.min((now-s)/dur,1);el.textContent=Math.floor(t*target)+'+';if(t<1)requestAnimationFrame(step);})(s);
+}
+new IntersectionObserver(entries=>{if(entries[0].isIntersecting)animCount(document.getElementById('leet-count'),300,1400);},{threshold:.5}).observe(document.getElementById('leet-count'));
+
+// ── QUIZ ──
+const BANK=[
+  {q:"What is Sairam's current CGPA at Lovely Professional University?",opts:["7.85","8.27","8.54","9.01"],ans:1,feedback:"<strong>8.27 CGPA</strong> — Sairam maintains a strong academic record at LPU's B.Tech CSE program, started in August 2023.",hint:"📚 Education section"},
+  {q:"Which API powers Sairam's Stress Relief Chatbot?",opts:["OpenAI GPT-4","Claude API","Gemini API","HuggingFace"],ans:2,feedback:"<strong>Gemini API</strong> — Google's Gemini API generates dynamic, context-aware mental wellness advice.",hint:"💻 Projects section"},
+  {q:"How many hours of DSA training did Sairam complete at ByteXL?",opts:["80+ hours","100+ hours","120+ hours","140+ hours"],ans:3,feedback:"<strong>140+ hours</strong> — Intensive, industry-led competitive programming and algorithmic training using C++.",hint:"📓 Training section"},
+  {q:"How many participants did Sairam compete against for the NPTEL Elite Award?",opts:["5,200","8,400","12,697","20,000+"],ans:2,feedback:"<strong>12,697 participants</strong> — Sairam ranked among elite performers nationwide in the NPTEL course.",hint:"🏆 Achievements section"},
+  {q:"Which CPU scheduling algorithms does Sairam's simulator implement?",opts:["FCFS & Round Robin only","FCFS, SJF, SRTF, Priority & Round Robin","SJF, SRTF & Priority only","All POSIX algorithms"],ans:1,feedback:"<strong>5 algorithms</strong> — FCFS, SJF, SRTF, Priority Scheduling, and Round Robin, with Gantt chart visualizations.",hint:"💻 Projects section"},
+  {q:"Which BI tool did Sairam use for the Tuber Service Analytics Dashboard?",opts:["Tableau","Python Matplotlib","Microsoft Power BI","Google Data Studio"],ans:2,feedback:"<strong>Microsoft Power BI</strong> — with Power Query for data cleaning and DAX for calculated KPIs.",hint:"💻 Projects section"},
+  {q:"Where is Sairam originally from?",opts:["Phagwara, Punjab","Bhubaneswar, Odisha","Berhampur, Odisha","Raipur, Chhattisgarh"],ans:2,feedback:"<strong>Berhampur, Odisha</strong> — Sairam completed 10th at St. Xavier's and 12th at Mount Litera Zee School before moving to Punjab.",hint:"🎓 Education section"},
+  {q:"Which data structure technique did Sairam use for quick lookups in the Library Management System?",opts:["Binary Search Tree","Hashing","Linear Search","AVL Tree"],ans:1,feedback:"<strong>Hashing</strong> — enables efficient O(1) lookups for books and members in the C++ system.",hint:"💻 Projects section"},
+  {q:"Which university is Sairam currently pursuing his B.Tech at?",opts:["IIT Bhubaneswar","NIT Rourkela","Lovely Professional University","VIT Vellore"],ans:2,feedback:"<strong>Lovely Professional University</strong> — located in Phagwara, Punjab. Joined August 2023.",hint:"🎓 Education section"},
+  {q:"How many LeetCode problems has Sairam solved?",opts:["100+","200+","300+","500+"],ans:2,feedback:"<strong>300+ problems</strong> — built through consistent practice in data structures, DP, graphs, and more.",hint:"🏆 Achievements section"},
+  {q:"What programming language was used in the 'Mastering in C' course?",opts:["C++","Java","C","Python"],ans:2,feedback:"<strong>C</strong> — covering variables, data types, loops, functions, pointers, recursion, and modular programming.",hint:"📓 Training section"},
+  {q:"Which STL containers did Sairam use in the Library Management System?",opts:["map and set","vector and list","queue and stack","deque and array"],ans:1,feedback:"<strong>vector and list</strong> — STL containers paired with hashing for efficient storage and search in C++.",hint:"💻 Projects section"},
+  {q:"Which issuer awarded Sairam for Computational Theory and Finite Automata?",opts:["NPTEL","Coursera","Infosys Springboard","ByteXL"],ans:2,feedback:"<strong>Infosys Springboard</strong> — covers Language Principles and Finite Automata Theory.",hint:"🏅 Certifications section"},
+  {q:"What percentage did Sairam score in his 10th (Matriculation)?",opts:["75.6%","78.2%","81.4%","85.0%"],ans:2,feedback:"<strong>81.4%</strong> — scored at St. Xavier's High School, Berhampur, Odisha in March 2021.",hint:"🎓 Education section"},
+  {q:"Which training platform provided Sairam's DSA course?",opts:["Coursera","ByteXL","NPTEL","Udemy"],ans:1,feedback:"<strong>ByteXL</strong> — industry-oriented platform with 140+ hours of structured competitive programming training.",hint:"📓 Training section"},
+  {q:"What does the Air Quality Dashboard analyze across regions?",opts:["Temperature & humidity","Pollutant levels & health indicators","Rainfall & wind speed","UV index & ozone"],ans:1,feedback:"<strong>Pollutant levels & health indicators</strong> — analyzed across NYC boroughs using Pivot Tables and dynamic slicers.",hint:"💻 Projects section"},
+  {q:"What year did Sairam start his B.Tech at LPU?",opts:["2021","2022","2023","2024"],ans:2,feedback:"<strong>2023</strong> — Sairam enrolled at LPU in August 2023 for B.Tech Computer Science & Engineering.",hint:"🎓 Education section"},
+  {q:"Which Infosys certification is about building apps without writing code?",opts:["Master Generative AI Tools","Build Generative AI Apps with No-Code Tools","Computational Theory","Privacy in Social Media"],ans:1,feedback:"<strong>Build Generative AI Apps with No-Code Tools</strong> — focused on no-code AI application development.",hint:"🏅 Certifications section"},
+  {q:"What type of visualizations does Sairam's CPU Simulator display?",opts:["Pie charts","Bar graphs","Gantt charts","Network diagrams"],ans:2,feedback:"<strong>Gantt charts</strong> — dynamically visualize process execution flow with turnaround and waiting times.",hint:"💻 Projects section"},
+  {q:"Which school did Sairam attend for his 12th (Intermediate)?",opts:["St. Xavier's High School","Delhi Public School","Mount Litera Zee School","Kendriya Vidyalaya"],ans:2,feedback:"<strong>Mount Litera Zee School</strong> in Berhampur, Odisha — scored 75.6% in Science stream.",hint:"🎓 Education section"}
+];
+
+const Q_PER_ROUND=7;
+let cur=0,score=0,answered=false,activeQ=[],roundNum=0,lastPicked=[];
+
+function shuffle(arr){return [...arr].sort(()=>Math.random()-.5);}
+
+function pickQuestions(){
+  const allIdx=BANK.map((_,i)=>i);
+  const shuffled=shuffle(allIdx);
+  let chosen=[];
+  for(let i=0;i<shuffled.length&&chosen.length<Q_PER_ROUND;i++)
+    if(!lastPicked.includes(shuffled[i]))chosen.push(shuffled[i]);
+  if(chosen.length<Q_PER_ROUND){
+    for(let i=0;i<shuffled.length&&chosen.length<Q_PER_ROUND;i++)
+      if(!chosen.includes(shuffled[i]))chosen.push(shuffled[i]);
+  }
+  lastPicked=chosen;
+  return chosen.map(i=>BANK[i]);
+}
+
+function renderQ(){
+  const q=activeQ[cur];
+  document.getElementById('quiz-q-num').textContent=cur+1;
+  document.getElementById('quiz-score-live').textContent=score;
+  document.getElementById('score-footer').textContent=score;
+  document.getElementById('qprog').style.width=((cur/activeQ.length)*100)+'%';
+  document.getElementById('quiz-question').textContent=q.q;
+  document.getElementById('quiz-feedback').style.display='none';
+  document.getElementById('quiz-next').style.display='none';
+  document.getElementById('quiz-hint').textContent=q.hint;
+  answered=false;
+
+  const correctText=q.opts[q.ans];
+  const shuffledOpts=shuffle(q.opts);
+  const newAnsIdx=shuffledOpts.indexOf(correctText);
+
+  const optsEl=document.getElementById('quiz-opts');
+  optsEl.innerHTML='';
+  ['A','B','C','D'].forEach((k,i)=>{
+    const btn=document.createElement('div');
+    btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-letter">${k})</span>${shuffledOpts[i]}`;
+    btn.onclick=()=>selectOpt(i,newAnsIdx,btn);
+    optsEl.appendChild(btn);
+  });
+}
+
+function selectOpt(idx,ansIdx,el){
+  if(answered)return;
+  answered=true;
+  const opts=document.querySelectorAll('.qopt');
+  opts.forEach(o=>o.classList.add('disabled'));
+  if(idx===ansIdx){
+    score++;el.classList.add('correct');
+    document.getElementById('quiz-score-live').textContent=score;
+    document.getElementById('score-footer').textContent=score;
+  }else{
+    el.classList.add('wrong');opts[ansIdx].classList.add('correct');
+  }
+  const fb=document.getElementById('quiz-feedback');
+  fb.innerHTML=(idx===ansIdx?'✅ Correct! ':'❌ Not quite. ')+activeQ[cur].feedback;
+  fb.style.display='block';
+  const nxt=document.getElementById('quiz-next');
+  nxt.style.display='inline-block';
+  nxt.textContent=cur<activeQ.length-1?'Next Question →':'See My Score!';
+}
+
+function nextQ(){
+  cur++;
+  if(cur>=activeQ.length){showResults();return;}
+  renderQ();
+}
+
+function showResults(){
+  document.getElementById('quiz-card').style.display='none';
+  document.getElementById('qprog').style.width='100%';
+  const res=document.getElementById('quiz-results');
+  res.style.display='block';
+  document.getElementById('result-score').textContent=score+'/'+activeQ.length;
+
+  const pct=score/activeQ.length;
+  let stamp='',msg='',badges=[];
+  if(pct>=1){stamp='PERFECT!';msg="<strong>Full marks!</strong> You read every single detail of this portfolio. Sairam would be thrilled! 🎉";badges=[{t:'⭐ 100% Score',e:true},{t:'🦅 Eagle Eye',e:true},{t:'📚 Master Reader',e:true}];}
+  else if(pct>=0.7){stamp='PASS!';msg="<strong>Great job!</strong> You absorbed most of the portfolio. A couple of details slipped by — try a new round for different questions! 😊";badges=[{t:'⭐ 70%+ Score',e:true},{t:'👀 Attentive Reader',e:true},{t:'📚 Master Reader',e:false}];}
+  else if(pct>=0.4){stamp='OK!';msg="<strong>Not bad!</strong> You got the highlights but missed some details. Scroll back up and take another crack at it! 📖";badges=[{t:'⭐ 70%+ Score',e:false},{t:'👀 Attentive Reader',e:false},{t:'📚 Master Reader',e:false}];}
+  else{stamp='RETRY!';msg="<strong>There's a lot to discover</strong> in this portfolio! Read it carefully and come back — each round has fresh questions. You got this! 💪";badges=[{t:'⭐ 70%+ Score',e:false},{t:'👀 Attentive Reader',e:false},{t:'📚 Master Reader',e:false}];}
+
+  document.getElementById('result-stamp-text').textContent=stamp;
+  document.getElementById('result-msg').innerHTML=msg;
+  roundNum++;
+  document.getElementById('round-info').textContent='Round '+roundNum+' complete · '+BANK.length+' questions in bank · options shuffled each time';
+  const br=document.getElementById('badge-row');
+  br.innerHTML=badges.map(b=>`<div class="badge${b.e?' earned':''}">${b.t}</div>`).join('');
+}
+
+function restartQuiz(){
+  cur=0;score=0;answered=false;
+  activeQ=pickQuestions();
+  document.getElementById('quiz-results').style.display='none';
+  document.getElementById('quiz-card').style.display='block';
+  renderQ();
+}
+
+activeQ=pickQuestions();
+renderQ();
+</script>
+</body>
+</html>
